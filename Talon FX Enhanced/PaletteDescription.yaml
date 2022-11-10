@@ -1,5 +1,5 @@
 !Component
-  name: Talon SRX Enhanced
+  name: Talon FX Enhanced
   type: PIDOutput
   help: A CTRE CAN Motor Controller.
   properties:
