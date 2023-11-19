@@ -1,0 +1,13 @@
+Spark FLEX:
+  Defaults: "Component,None"
+  ClassName: "CANSparkMax"
+  Construction: "#variable($Name) = new ${ClassName}($CAN_ID, MotorType.$MOTOR_TYPE);"
+  Import: "import com.revrobotics.CANSparkMax;\nimport com.revrobotics.CANSparkMax.IdleMode;\nimport com.revrobotics.CANSparkMaxLowLevel.MotorType;"
+  Extra: >-
+      #if($Restore_Factory_Defaults)#variable($Short_Name).restoreFactoryDefaults();#end
+        
+              #variable($Short_Name).setInverted(${Inverted});
+              #variable($Short_Name).setIdleMode(IdleMode.$Idle_Mode);
+              #variable($Short_Name).burnFlash();
+        
+      
