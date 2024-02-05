@@ -47,4 +47,11 @@
     - !IntegerProperty
       name: Motion Magic Acceleration
       default: 0
+    - !BooleanProperty
+      name: Is Follower
+      default: false
+    - !TypeSelectionProperty
+      name: Follower Motor
+      type: PIDOutput
+      default: None
       

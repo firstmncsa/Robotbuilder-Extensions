@@ -46,3 +46,5 @@ Kraken X60 Enhanced:
               #variable($Short_Name).configMotionAcceleration($Motion_Magic_Acceleration, $kTimeoutMs);
               #end
               #end
+
+              #if($Is_Follower)#variable($Short_Name).follow(#variable($Follower_Motor));#end
