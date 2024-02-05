@@ -46,6 +46,8 @@ Talon SRX Enhanced:
               #end
               #end
 
+              #if($Is_Follower)#variable($Short_Name).follow(#variable($Follower_Motor));#end
+
 
 
 

@@ -2,8 +2,7 @@ Talon FX Enhanced:
   Defaults: "CustomComponent,None"
   ClassName: "WPI_TalonFX"
   Construction: "#variable($Name) = new ${ClassName}($CAN_ID);"
-  Import: "import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-  import com.ctre.phoenix.motorcontrol.NeutralMode;"
+  Import: "import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;\nimport com.ctre.phoenix.motorcontrol.NeutralMode;"
   Extra: >-
       #set($kPIDLoopIdx = 0)
       #set($kSlotIdx = 0)
@@ -46,3 +45,5 @@ Talon FX Enhanced:
               #variable($Short_Name).configMotionAcceleration($Motion_Magic_Acceleration, $kTimeoutMs);
               #end
               #end
+
+              #if($Is_Follower)#variable($Short_Name).follow(#variable($Follower_Motor));#end
