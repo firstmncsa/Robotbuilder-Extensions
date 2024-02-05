@@ -1,5 +1,5 @@
 !Component
-  name: Spark MAX
+  name: Spark FLEX
   type: PIDOutput
   help: A Rev Robotic brushless DC Motor Controller.
   properties:
@@ -22,10 +22,5 @@
       name: Idle Mode
       choices: ["kCoast", "kBrake"]
       default: "kCoast"
-    - !BooleanProperty
-      name: Is Follower
-      default: false
-    - !TypeSelectionProperty
-      name: Follower Motor
-      type: PIDOutput
-      default: None
+      
+      
