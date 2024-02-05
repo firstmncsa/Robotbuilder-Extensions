@@ -22,5 +22,12 @@
       name: Idle Mode
       choices: ["kCoast", "kBrake"]
       default: "kCoast"
+    - !BooleanProperty
+      name: Is Follower
+      default: false
+    - !TypeSelectionProperty
+      name: Follower Motor
+      type: PIDOutput
+      default: None
       
       
