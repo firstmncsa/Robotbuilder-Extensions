@@ -8,8 +8,9 @@ Spark MAX:
         
               #variable($Short_Name).setInverted(${Inverted});
               #variable($Short_Name).setIdleMode(IdleMode.$Idle_Mode);
-              #if($Is_Follower)#variable($Short_Name).follow(#variable($Follower_Motor));#end
-
+              #if(($Follow) != "None")
+              #variable($Follow).follow(#variable($Short_Name));
+              #end
               #variable($Short_Name).burnFlash();
         
       

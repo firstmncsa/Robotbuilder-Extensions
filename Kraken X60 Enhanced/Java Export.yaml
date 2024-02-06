@@ -47,4 +47,6 @@ Kraken X60 Enhanced:
               #end
               #end
 
-              #if($Is_Follower)#variable($Short_Name).follow(#variable($Follower_Motor));#end
+              #if(($Follow) != "None")
+              #variable($Follow).follow(#variable($Short_Name));
+              #end

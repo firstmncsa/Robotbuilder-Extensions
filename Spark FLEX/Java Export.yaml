@@ -1,14 +1,16 @@
 Spark FLEX:
   Defaults: "Component,None"
   ClassName: "CANSparkFlex"
-  Construction: "#variable($Name) = new ${ClassName}($CAN_ID, CANSparkLowLevelMotorType.$MOTOR_TYPE);"
+  Construction: "#variable($Name) = new ${ClassName}($CAN_ID, CANSparkLowLevel.MotorType.$MOTOR_TYPE);"
   Import: "import com.revrobotics.CANSparkFlex;\n\nimport com.revrobotics.CANSparkBase.IdleMode;\nimport com.revrobotics.CANSparkLowLevel;"
   Extra: >-
       #if($Restore_Factory_Defaults)#variable($Short_Name).restoreFactoryDefaults();#end
         
               #variable($Short_Name).setInverted(${Inverted});
               #variable($Short_Name).setIdleMode(IdleMode.$Idle_Mode);
-              #if($Is_Follower)#variable($Short_Name).follow(#variable($Follower_Motor));#end
+              #if(($Follow) != "None")
+              #variable($Follow).follow(#variable($Short_Name));
+              #end
               #variable($Short_Name).burnFlash();
         
       

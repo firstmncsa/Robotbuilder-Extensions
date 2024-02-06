@@ -47,11 +47,9 @@
     - !IntegerProperty
       name: Motion Magic Acceleration
       default: 0
-    - !BooleanProperty
-      name: Is Follower
-      default: false
     - !TypeSelectionProperty
-      name: Follower Motor
+      name: Follow
       type: PIDOutput
+      validators: [TypeDropdownSelectedNoneOk]
       default: None
       
