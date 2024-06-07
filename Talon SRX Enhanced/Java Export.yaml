@@ -47,7 +47,7 @@ Talon SRX Enhanced:
               #end
 
               #if(($Follow) != "None")
-              #variable($Follow).follow(#variable($Short_Name));
+              #variable($Short_Name).follow(#variable($Follow));
               #end
 
 
