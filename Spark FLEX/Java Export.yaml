@@ -1,16 +1,21 @@
 Spark FLEX:
   Defaults: "Component,None"
-  ClassName: "CANSparkFlex"
-  Construction: "#variable($Name) = new ${ClassName}($CAN_ID, CANSparkLowLevel.MotorType.$MOTOR_TYPE);"
-  Import: "import com.revrobotics.CANSparkFlex;\n\nimport com.revrobotics.CANSparkBase.IdleMode;\nimport com.revrobotics.CANSparkLowLevel;"
+  ClassName: "SparkFlex"
+  Construction: "#variable($Name) = new ${ClassName}($CAN_ID, MotorType.$MOTOR_TYPE);\nSparkFlexConfig #variable($Name)_config = new SparkFlexConfig();"
+  Import: " import com.revrobotics.spark.SparkBase.ResetMode;\n
+            import com.revrobotics.spark.SparkLowLevel.MotorType;\n
+            import com.revrobotics.spark.SparkFlex;\n
+            import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;\n
+            import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;\n
+            import com.revrobotics.spark.config.SparkFlexConfig;\n
+              import com.revrobotics.spark.SparkBase.PersistMode;"
   Extra: >-
-      #if($Restore_Factory_Defaults)#variable($Short_Name).restoreFactoryDefaults();#end
-        
-              #variable($Short_Name).setInverted(${Inverted});
-              #variable($Short_Name).setIdleMode(IdleMode.$Idle_Mode);
-              #if(($Follow) != "None")
-              #variable($Short_Name).follow(#variable($Follow));
-              #end
-              #variable($Short_Name).burnFlash();
+          #variable($Name)_config
+             .inverted(${Inverted})
+             .idleMode(IdleMode.$Idle_Mode);
+          #if(($Follow) != "None")
+             .follow(#variable($Follow));
+          #end
+          #variable($Name).configure(#variable($Name)_config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         
       
