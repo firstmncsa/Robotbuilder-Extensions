@@ -1,20 +1,33 @@
 Kraken X60 Enhanced:
   Defaults: "CustomComponent,None"
-  ClassName: "WPI_TalonFX"
-  Construction: "#variable($Name) = new ${ClassName}($CAN_ID);"
-  Import: "import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-  import com.ctre.phoenix.motorcontrol.NeutralMode;"
+  ClassName: "TalonFX"
+  Construction: "#variable($Name) = new ${ClassName}($CAN_ID);\n
+                  // Creates the configurator for the motor.\n
+                  TalonFXConfiguration #variable($Name)_config = new TalonFXConfiguration();"
+  Import: "import com.ctre.phoenix6.configs.TalonFXConfiguration;\n
+            import com.ctre.phoenix6.controls.MotionMagicTorqueCurrentFOC;\n
+            import com.ctre.phoenix6.hardware.CANcoder;\n
+            import com.ctre.phoenix6.hardware.TalonFX;\n
+            import com.ctre.phoenix6.signals.GravityTypeValue;\n
+            import com.ctre.phoenix6.signals.InvertedValue;\n
+            import com.ctre.phoenix6.signals.NeutralModeValue;"
   Extra: >-
-      #set($kPIDLoopIdx = 0)
-      #set($kSlotIdx = 0)
-      #set($kTimeoutMs = 30)
-      /* Factory default hardware to prevent unexpected behavior */
-              #if(!$Restore_Factory_Defaults)//#end#variable($Short_Name).configFactoryDefault();
+     /* User can optionally change the configs or leave it alone to perform a factory default */
+      #if($Inverted)
+            #variable($Name)_config.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+      #else
+            #variable($Name)_config.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+      #end
+      
 
               /* Invert Motor? and set Break Mode */
-              #variable($Short_Name).setInverted($Inverted);
-              #variable($Short_Name).setNeutralMode(NeutralMode.$Break_Mode);
-
+      #if($Break_Mode)
+        krakenX60Enhanced1_config.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+      #else
+        krakenX60Enhanced1_config.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+      #end
+          
+      /*
               /* Set the peak and nominal outputs */
               #variable($Short_Name).configNominalOutputForward(0, $kTimeoutMs);
               #variable($Short_Name).configNominalOutputReverse(0, $kTimeoutMs);
@@ -46,7 +59,7 @@ Kraken X60 Enhanced:
               #variable($Short_Name).configMotionAcceleration($Motion_Magic_Acceleration, $kTimeoutMs);
               #end
               #end
-
+      */
               #if(($Follow) != "None")
               #variable($Short_Name).follow(#variable($Follow));
               #end
